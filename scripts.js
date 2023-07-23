@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 console.log ('Hello')
 
 const place_name = 'Moscow'
@@ -45,3 +46,6 @@ fetch(API_URL_GEO_DATA)
 
 
 
+=======
+Hello
+>>>>>>> d3852f4f7d3fca181b8d707350d9801ab2863449
