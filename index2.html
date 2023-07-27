@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	
+   
+	<script>
+        function createNode(element) {
+    return document.createElement(element);
+    }
+    //function append(parent, el) {
+        //return parent.appendChild(el);
+   // }
+    //const ul = document.getElementById('authors');
+   
+
+const place_name = 'Moscow'
+const API_KEY_YANDEX = '85eaff1b-ef9e-4c11-89bc-ca01d1ae43de'
+
+const API_URL_GEO_DATA = `https://geocode-maps.yandex.ru/1.x/?apikey=${API_KEY_YANDEX}&geocode=${place_name}&format=json`
+   
+    
+fetch(API_URL_GEO_DATA)
+
+.then(resp => resp.json())
+.then(function(date) {
+
+    //console.log('date ===', date)
+    //console.log('coordinates ===', date.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos);
+const coor = date.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos;
+const coordinates = coor.split(' ');
+console.log(coordinates[1]);
+
+
+//const Lat = coordinates.split(' ')[1];
+//const Lng = coordinates.split(' ')[0];
+//const Latitude = 'Lat'
+//console.log (Lat);
+
+//console.log (coordinates[1]);
+
+//const API_OPEN_METEO = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=52.549995&longitude=13.450001&hourly=pm10,pm2_5`
+const API_OPEN_METEO = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${coordinates[1]}&longitude=${coordinates[0]}&hourly=pm10,pm2_5`
+fetch(API_OPEN_METEO)
+.then(resp => resp.json())
+.then(function(date) {
+
+console.log('date ===', date)
+// }
+})
+})
+//  .catch(function(error) {
+//     consol.log(error);
+//  })
+       </script>
+
+</body>
+</html>
