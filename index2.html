@@ -3,60 +3,68 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Концентрация частиц</title>
 </head>
 
 <body>
-	
+    <h2>Концентрация частиц</h2>
+    <ul id="impurities"></ul>
+
    
-	<script>
-        function createNode(element) {
+<script>
+    function createNode(element) {
     return document.createElement(element);
-    }
-    //function append(parent, el) {
-        //return parent.appendChild(el);
-   // }
-    //const ul = document.getElementById('authors');
-   
+}
+
+function append(parent, el) {
+  return parent.appendChild(el);
+}
+
+//Получаем координаты места
+const ul = document.getElementById('impurities');   
 
 const place_name = 'Moscow'
 const API_KEY_YANDEX = '85eaff1b-ef9e-4c11-89bc-ca01d1ae43de'
-
 const API_URL_GEO_DATA = `https://geocode-maps.yandex.ru/1.x/?apikey=${API_KEY_YANDEX}&geocode=${place_name}&format=json`
    
     
 fetch(API_URL_GEO_DATA)
-
 .then(resp => resp.json())
 .then(function(date) {
-
-    //console.log('date ===', date)
-    //console.log('coordinates ===', date.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos);
+    console.log('date ===', date)
+   
 const coor = date.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos;
 const coordinates = coor.split(' ');
-console.log(coordinates[1]);
 
-
-//const Lat = coordinates.split(' ')[1];
-//const Lng = coordinates.split(' ')[0];
-//const Latitude = 'Lat'
-//console.log (Lat);
-
-//console.log (coordinates[1]);
-
-//const API_OPEN_METEO = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=52.549995&longitude=13.450001&hourly=pm10,pm2_5`
+//Получаем распределение частиц в заданном месте
 const API_OPEN_METEO = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${coordinates[1]}&longitude=${coordinates[0]}&hourly=pm10,pm2_5`
 fetch(API_OPEN_METEO)
 .then(resp => resp.json())
 .then(function(date) {
+   //console.log('date ===', date)
+   
+//Выводим информацию в браузер
+const times = date.hourly.time;
+const pm10s = date.hourly.pm10;
+const pm2_5s = date.hourly.pm2_5;
 
-console.log('date ===', date)
-// }
+dateLength=times.length;
+//console.log(dateLength);
+
+
+ for (let i = 1; i <= dateLength; i++) {
+    let li = createNode('li');
+    let span = createNode('span');
+    span.innerHTML = `${times[i]} ${pm10s[i]} ${pm2_5s[i]}`;
+      
+    append(li, span);
+    append(ul, li);
+}
 })
+.catch(function(error) {
+    console.log(error);  
+}); 
 })
-//  .catch(function(error) {
-//     consol.log(error);
-//  })
        </script>
 
 </body>
