@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Концентрация частиц</title>
-</head>
-
-<body>
-    <h2>Концентрация частиц</h2>
-    <ul id="impurities"></ul>
-
-    <script src="scripts2.js">
-    
-    </script>  
-
-    
-<!-- <script>
     function createNode(element) {
     return document.createElement(element);
 }
@@ -69,7 +51,4 @@ dateLength=times.length;
     console.log(error);  
 }); 
 })
-       </script> -->
-
-</body>
-</html>
+      
