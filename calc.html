@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calc</title>
+  </head>
+
+  <body>
+    <h3>Введите температуру</h3>
+    <input type="number" id="temperature-input" placeholder="32" value="" />
+   
+
+    <h3>Введите единицу измерения температуры</h3>
+    <input type="text" id="unit-select" placeholder="C"value="" />
+    <br />
+    <br />
+    <button onclick="temp()">Расчет</button>
+    <br />
+    <br />
+
+    <script>
+     
+      function temp() {
+        const temperature = document.getElementById("temperature-input").value;
+        
+        let unit = document.getElementById("unit-select").value;
+        
+        if (unit === "C") {
+          var result = (temperature * 9) / 5 + 32;
+         
+          let unit = "F"
+          document.write(result, unit);
+          console.log(unit)
+        } else if (unit === "F") {
+          var result = ((temperature - 32) * 5) / 9;
+          let unit = "C"
+          document.write(result, unit);
+
+        }
+
+        
+        
+      }
+    </script>
+  </body>
+</html>
